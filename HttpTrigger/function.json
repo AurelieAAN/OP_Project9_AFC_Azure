@@ -1,0 +1,41 @@
+{
+  "scriptFile": "__init__.py",
+  "bindings": [
+    {
+      "authLevel": "anonymous",
+      "type": "httpTrigger",
+      "direction": "in",
+      "name": "req",
+      "methods": [
+        "get",
+        "post"
+      ]
+    },
+    {
+      "name": "dfsblob",
+      "type": "blob",
+      "direction":"in",
+      "path": "input/dfs.csv",
+      "connection": "storageacc_STORAGE"
+    },
+    {
+      "type": "blob",
+      "direction":"in",
+      "name": "dfsuserartblob",
+      "path": "input/dfs_user_art.csv",
+      "connection": "storageacc_STORAGE"
+    },
+    {
+      "type": "blob",
+      "direction":"in",
+      "name": "articlesembedblob",
+      "path": "input/articles_embeddings.pickle",
+      "connection": "storageacc_STORAGE"
+    },
+    {
+      "type": "http",
+      "direction": "out",
+      "name": "$return"
+    }
+  ]
+}
