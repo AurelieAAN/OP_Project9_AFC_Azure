@@ -46,7 +46,19 @@ def main(req: func.HttpRequest, dfsblob: func.InputStream, dfsuserartblob: func.
     # Reading from the input binding
     dfs = dfsblob.read()
     dfs_user_art = dfsuserartblob.read()
-    art_embed = articlesembedblob.read()
+    df_arts_embedd_acp = articlesembedblob.read()
+    del df_arts_embedd_acp["Unnamed: 0"]
+    arts_embedd_acp = df_arts_embedd_acp[[ '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10',
+       '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22',
+       '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34',
+       '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46',
+       '47', '48', '49', '50', '51']]
+    arts_embedd_acp = arts_embedd_acp[[ '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10',
+       '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22',
+       '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34',
+       '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46',
+       '47', '48', '49', '50', '51']].to_numpy(dtype = 'float32')
+
     arts = dfs["click_article_id"].value_counts().index
 
     name = req.params.get('id_user')
@@ -58,7 +70,7 @@ def main(req: func.HttpRequest, dfsblob: func.InputStream, dfsuserartblob: func.
             pass
         else:
             id_user = req_body.get('id_user')
-            result = user_recommendation(dfs_user_art,arts,art_embed,id_user)
+            result = user_recommendation(dfs_user_art,arts,arts_embedd_acp,id_user)
             result = result.to_json(orient="split")
     if name:
         return func.HttpResponse(

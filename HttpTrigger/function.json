@@ -29,7 +29,7 @@
       "type": "blob",
       "direction":"in",
       "name": "articlesembedblob",
-      "path": "input/articles_embeddings.pickle",
+      "path": "input/df_arts_embedd_acp.csv",
       "connection": "storageacc_STORAGE"
     },
     {
