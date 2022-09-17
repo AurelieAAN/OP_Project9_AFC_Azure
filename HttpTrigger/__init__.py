@@ -72,7 +72,13 @@ def main(req: func.HttpRequest, dfsblob: func.InputStream, dfsuserartblob: func.
             id_user = req_body.get('id_user')
             result = user_recommendation(dfs_user_art,arts,arts_embedd_acp,id_user)
             result = result.to_json(orient="split")
+            return func.HttpResponse(
+                                    json.dumps(result),
+                                    mimetype="application/json",
+                                )
     if name:
+        result = user_recommendation(dfs_user_art,arts,arts_embedd_acp,name)
+        result = result.to_json(orient="split")
         return func.HttpResponse(
                                     json.dumps(result),
                                     mimetype="application/json",
