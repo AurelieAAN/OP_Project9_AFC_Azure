@@ -12,13 +12,6 @@
       ]
     },
     {
-      "name": "dfsblob",
-      "type": "blob",
-      "direction":"in",
-      "path": "input/dfs.csv",
-      "connection": "storageacc_STORAGE"
-    },
-    {
       "type": "http",
       "direction": "out",
       "name": "$return"
