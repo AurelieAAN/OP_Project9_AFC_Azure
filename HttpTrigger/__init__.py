@@ -44,9 +44,9 @@ def user_recommendation(dfs_user_art, arts,art_embed, x):
 def main(req: func.HttpRequest, dfsblob: func.InputStream, dfsuserartblob: func.InputStream, articlesembedblob: func.InputStream) -> func.HttpResponse:
     logging.info('Python HTTP trigger function processed a request.')
     # Reading from the input binding
-    dfs = dfsblob.read()
-    dfs_user_art = dfsuserartblob.read()
-    df_arts_embedd_acp = articlesembedblob.read()
+    dfs = bytearray(dfsblob.read())
+    dfs_user_art = bytearray(dfsuserartblob.read())
+    df_arts_embedd_acp = bytearray(articlesembedblob.read())
     del df_arts_embedd_acp["Unnamed: 0"]
     arts_embedd_acp = df_arts_embedd_acp[[ '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10',
        '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22',
