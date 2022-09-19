@@ -45,8 +45,9 @@ def main(req: func.HttpRequest, dfsblob: func.InputStream) -> func.HttpResponse:
     logging.info('Python HTTP trigger function processed a request.')
     dfs = bytearray(dfsblob.read())
     df_blob = pd.read_csv(BytesIO(dfs))
-    name = {"test":"jjj"}
+    name = df_blob.head(2)
+    result = name.to_json(orient="split")
     func.HttpResponse.mimetype = 'application/json'
     func.HttpResponse.charset = 'utf-8'
 
-    return func.HttpResponse(json.dumps(name))
+    return func.HttpResponse(json.dumps(result))
