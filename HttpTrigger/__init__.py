@@ -80,7 +80,7 @@ def main(req: func.HttpRequest, dfsblob: func.InputStream,
     json_body = json.loads(req_body)
     logging.info(f"Request json: {json_body}")
     # logging.info("test:")
-    name=None
+    name = None
     name = json_body['id_user']
     logging.info(f"Request name: {name}")
     # logging.info(f"name: ",name)
