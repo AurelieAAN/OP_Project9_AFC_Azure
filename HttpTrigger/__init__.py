@@ -78,13 +78,14 @@ def main(req: func.HttpRequest, dfsblob: func.InputStream,
     req_body = req_body_bytes.decode("utf-8")
     logging.info(f"Request: {req_body}")
 
-    req_body = req_body.get_json()
-    name = req_body.get('id_user')
-    logging.info(f"Request: {str(name)}")
+    name = req_body['id_user']
     #name = req.params.get('id_user')
     if not name:
-        req_body = req.get_json()
-        name = req_body.get('id_user')
+        try:
+        #req_body = req.get_json()
+            name = req_body.get('id_user')
+        except ValueError:
+            pass
     if name:
         result = user_recommendation(dfs_user_art,arts,arts_embedd_acp,name)
         result = result.to_json(orient="split")
