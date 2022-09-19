@@ -73,7 +73,9 @@ def main(req: func.HttpRequest, dfsblob: func.InputStream,
     arts = dfs["click_article_id"].value_counts().index
 
     name = req.params.get('id_user')
-
+    if not name:
+        req_body = req.get_json()
+        name = req_body.get('id_user')
     if name:
         result = user_recommendation(dfs_user_art,arts,arts_embedd_acp,name)
         result = result.to_json(orient="split")
