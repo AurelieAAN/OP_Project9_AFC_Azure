@@ -9,8 +9,10 @@ from urllib.parse import parse_qs
 
 
 def user(dfs_user_art, x):
+    logging.info('---1 -------begin user()')
     user = dfs_user_art.loc[dfs_user_art['user_id'] == x]
     if len(user) > 0:
+        logging.info('---1 -------end user()')
         return user
     return np.nan
 
@@ -21,6 +23,7 @@ def calcul_cosine_similarity(art_embed):
 
 
 def arts_recommendations(arts, art_embed, x):
+    logging.info('---1 -------begin arts_recommendations')
     indices = pd.Series(arts.index, index=arts[0])
     idx = indices[x]
     cosine_sim = calcul_cosine_similarity(art_embed)
@@ -28,17 +31,20 @@ def arts_recommendations(arts, art_embed, x):
     sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)
     sim_scores = sim_scores[1:21]
     movie_indices = [i[0] for i in sim_scores]
+    logging.info('---1 -------end arts_recommendations')
     return sim_scores#x.iloc[movie_indices]
 
 
 def user_recommendation(dfs_user_art, arts,art_embed, x):
     reco = []
+    logging.info('---1 -------begin user_recommendation')
     user_arts = user(dfs_user_art, x)
     for art in user_arts["click_article_id"]:
         livre = arts_recommendations(arts,art_embed, art)
         reco.append(livre[0])
     sim_scores = sorted(reco, key=lambda x: x[1], reverse=True)
     sim_scores = sim_scores[1:6]
+    logging.info('---1 -------end user_recommendation')
     return sim_scores
 
 
