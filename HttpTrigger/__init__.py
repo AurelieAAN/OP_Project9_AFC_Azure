@@ -76,9 +76,10 @@ def main(req: func.HttpRequest, dfsblob: func.InputStream,
     req_body_bytes = req.get_body()
     logging.info(f"Request Bytes: {req_body_bytes}")
     req_body = req_body_bytes.decode("utf-8")
-    logging.info(f"Request: {req_body}")
+    logging.info(f"Request: ",req_body)
 
-    name = req_body['id_user']
+    name = req_body['id_user'][0]
+    logging.info(f"name: ",str(name))
     #name = req.params.get('id_user')
     if not name:
         try:
@@ -87,6 +88,7 @@ def main(req: func.HttpRequest, dfsblob: func.InputStream,
         except ValueError:
             pass
     if name:
+        name = int(name)
         result = user_recommendation(dfs_user_art,arts,arts_embedd_acp,name)
         result = result.to_json(orient="split")
         func.HttpResponse.mimetype = 'application/json'
