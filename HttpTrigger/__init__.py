@@ -76,7 +76,6 @@ def main(req: func.HttpRequest, dfsblob: func.InputStream,
     req_body_bytes = req.get_body()
     logging.info(f"Request Bytes: {req_body_bytes}")
     req_body = req_body_bytes.decode("utf-8")
-    logging.info(f"Request: ",req_body)
     # logging.info("test1")
     # json_body = json.loads(req_body)
     # logging.info("test:")
@@ -96,10 +95,11 @@ def main(req: func.HttpRequest, dfsblob: func.InputStream,
     #     func.HttpResponse.mimetype = 'application/json'
     #     func.HttpResponse.charset = 'utf-8'
     #     return func.HttpResponse(json.dumps(result))
+    #     func.HttpResponse.mimetype = 'application/json'
     return func.HttpResponse(
-            "ok",
-            status_code=200
-        )
+                "This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response.",
+                status_code=200
+            )
     # else:
     #     return func.HttpResponse(
     #          "This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response.",
