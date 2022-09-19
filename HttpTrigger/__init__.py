@@ -4,7 +4,7 @@ import azure.functions as func
 import pandas as pd
 from sklearn.metrics.pairwise import cosine_similarity
 import json
-
+from io import BytesIO
 
 
 def user(dfs_user_art, x):
@@ -40,12 +40,13 @@ def user_recommendation(dfs_user_art, arts,art_embed, x):
     sim_scores = sim_scores[1:6]
     return sim_scores
 
-
-def main(req: func.HttpRequest) -> func.HttpResponse:
+def main(req: func.HttpRequest, dfsblob: func.InputStream) -> func.HttpResponse:
+#def main(req: func.HttpRequest) -> func.HttpResponse:
     logging.info('Python HTTP trigger function processed a request.')
-
+    dfs = bytearray(dfsblob.read())
+    df_blob = pd.read_csv(BytesIO(dfs))
     name = {"test":"jjj"}
-    return func.HttpResponse(
-        json.dumps(name),
-        mimetype="application/json",
-    )
+    func.HttpResponse.mimetype = 'application/json'
+    func.HttpResponse.charset = 'utf-8'
+
+    return func.HttpResponse(json.dumps(name))
