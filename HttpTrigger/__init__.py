@@ -77,9 +77,11 @@ def main(req: func.HttpRequest, dfsblob: func.InputStream,
     logging.info(f"Request Bytes: {req_body_bytes}")
     req_body = req_body_bytes.decode("utf-8")
     logging.info(f"Request: ",req_body)
-
-    name = req_body['id_user'][0]
-    logging.info(f"name: ",str(name))
+    logging.info("test1")
+    json_body = json.loads(req_body)
+    logging.info("test:")
+    name = json_body['id_user']
+    logging.info(f"name: ",name)
     #name = req.params.get('id_user')
     if not name:
         try:
