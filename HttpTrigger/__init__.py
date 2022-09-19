@@ -5,6 +5,7 @@ import pandas as pd
 from sklearn.metrics.pairwise import cosine_similarity
 import json
 from io import BytesIO
+from urllib.parse import parse_qs
 
 
 def user(dfs_user_art, x):
@@ -72,7 +73,16 @@ def main(req: func.HttpRequest, dfsblob: func.InputStream,
 
     arts = dfs["click_article_id"].value_counts().index
 
-    name = req.params.get('id_user')
+    req_body_bytes = req.get_body()
+    logging.info(f"Request Bytes: {req_body_bytes}")
+    req_body = req_body_bytes.decode("utf-8")
+    logging.info(f"Request: {req_body}")
+
+    name = parse_qs(req_body)["id_user"][0]
+
+
+
+    #name = req.params.get('id_user')
     if not name:
         req_body = req.get_json()
         name = req_body.get('id_user')
