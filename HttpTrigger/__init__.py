@@ -84,26 +84,18 @@ def main(req: func.HttpRequest, dfsblob: func.InputStream,
     logging.info(f"Request name: {name}")
     # logging.info(f"name: ",name)
     # #name = req.params.get('id_user')
-    # if not name:
-    #     try:
-    #     #req_body = req.get_json()
-    #         name = req_body.get('id_user')
-    #     except ValueError:
-    #         pass
-    # if name:
-    #     name = int(name)
-    #     result = user_recommendation(dfs_user_art,arts,arts_embedd_acp,name)
-    #     result = result.to_json(orient="split")
-    #     func.HttpResponse.mimetype = 'application/json'
-    #     func.HttpResponse.charset = 'utf-8'
-    #     return func.HttpResponse(json.dumps(result))
-    #     func.HttpResponse.mimetype = 'application/json'
-    return func.HttpResponse(
-                "This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response.",
+    if name:
+        name = int(name)
+        result = user_recommendation(dfs_user_art,arts,arts_embedd_acp,name)
+        result = result.to_json(orient="split")
+        func.HttpResponse.mimetype = 'application/json'
+        func.HttpResponse.charset = 'utf-8'
+        return func.HttpResponse(
+                json.dumps(result),
                 status_code=200
-            )
-    # else:
-    #     return func.HttpResponse(
-    #          "This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response.",
-    #          status_code=200
-    #     )
+                )
+    else:
+        return func.HttpResponse(
+              "This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response.",
+              status_code=200
+        )
