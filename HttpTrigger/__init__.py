@@ -23,6 +23,7 @@ def calcul_cosine_similarity(art_embed):
 
 
 def arts_recommendations(arts, art_embed, x):
+    arts = pd.DataFrame(arts)
     logging.info('---1 -------begin arts_recommendations')
     indices = pd.Series(arts.index, index=arts[0])
     idx = indices[x]
@@ -82,7 +83,6 @@ def main(req: func.HttpRequest, dfsblob: func.InputStream,
        '47', '48', '49', '50', '51']].to_numpy(dtype=np.float32)
 
     arts = dfs["click_article_id"].value_counts().index
-    arts = pd.DataFrame(arts)
     req_body_bytes = req.get_body()
     logging.info(f"Request Bytes: {req_body_bytes}")
     req_body = req_body_bytes.decode("utf-8")
