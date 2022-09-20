@@ -26,7 +26,9 @@ def arts_recommendations(arts, art_embed, x):
     logging.info('---1 -------begin arts_recommendations')
     indices = pd.Series(arts.index, index=arts[0])
     idx = indices[x]
+    logging.info('---1 -------begin cosine')
     cosine_sim = calcul_cosine_similarity(art_embed)
+    logging.info('---1 -------end cosine')
     sim_scores = list(enumerate(cosine_sim[idx]))
     sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)
     sim_scores = sim_scores[1:21]
