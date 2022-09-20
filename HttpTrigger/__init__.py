@@ -24,13 +24,13 @@ def calcul_cosine_similarity(art_embed):
 
 def arts_recommendations(arts, art_embed, x):
     logging.info('---1 -------begin arts_recommendations')
-    indices = pd.Series(arts.index, index=arts[0])
+    indices = pd.Series(arts, index=arts[0])
     idx = indices[x]
     cosine_sim = calcul_cosine_similarity(art_embed)
     sim_scores = list(enumerate(cosine_sim[idx]))
     sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)
     sim_scores = sim_scores[1:21]
-    movie_indices = [i[0] for i in sim_scores]
+    #movie_indices = [i[0] for i in sim_scores]
     logging.info('---1 -------end arts_recommendations')
     return sim_scores#x.iloc[movie_indices]
 
