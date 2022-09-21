@@ -62,8 +62,8 @@ def main(req: func.HttpRequest, dfsblob: func.InputStream,
     logging.info('Python HTTP trigger function processed a request.')
     dfs = transform_to_dataframe(dfsblob)
     dfs_user_art = transform_to_dataframe(dfsuserartblob)
-    df_arts_embedd_acp = transform_to_dataframe(articlesembedblob,ityp=1)
-
+    df_arts_embedd_acp = transform_to_dataframe(articlesembedblob)
+    logging.info('Python HTTP trigger function processed a request.')
     del df_arts_embedd_acp["Unnamed: 0"]
     arts_embedd_acp = df_arts_embedd_acp[['0', '1', '2', '3','4', '5','6','7',
                                           '8', '9', '10','11','12','13', '14',
