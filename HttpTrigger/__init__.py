@@ -63,7 +63,7 @@ def main(req: func.HttpRequest, dfsblob: func.InputStream,
     dfs = transform_to_dataframe(dfsblob)
     dfs_user_art = transform_to_dataframe(dfsuserartblob)
     df_arts_embedd_acp = transform_to_dataframe(articlesembedblob)
-    logging.info('Python HTTP trigger function processed a request.')
+    logging.info('--------------------Python HTTP trigger function processed a request.')
     del df_arts_embedd_acp["Unnamed: 0"]
     arts_embedd_acp = df_arts_embedd_acp[['0', '1', '2', '3','4', '5','6','7',
                                           '8', '9', '10','11','12','13', '14',
@@ -79,6 +79,7 @@ def main(req: func.HttpRequest, dfsblob: func.InputStream,
        '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46',
        '47', '48', '49', '50', '51']].to_numpy(dtype=np.float64)
     arts = dfs["click_article_id"].value_counts().index
+    logging.info(f"--------------------Request len: {len(arts)}")
     req_body_bytes = req.get_body()
     logging.info(f"Request Bytes: {req_body_bytes}")
     req_body = req_body_bytes.decode("utf-8")
