@@ -24,7 +24,7 @@ def calcul_cosine_similarity(art_embed):
 def arts_recommendations(arts, art_embed, x):
     #arts = pd.DataFrame(arts)
     logging.info('---1 -------begin arts_recommendations')
-    indices = pd.Series(arts, index=arts)
+    indices = pd.Series(range(0,46033), index=arts)
     idx = indices[x]
     logging.info('---1 -------begin cosine')
     cosine_sim = calcul_cosine_similarity(art_embed)
