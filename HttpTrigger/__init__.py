@@ -17,7 +17,7 @@ def user(dfs_user_art, x):
 
 
 def calcul_cosine_similarity(art_embed):
-    cosine_sim = cosine_similarity(art_embed, art_embed)
+    cosine_sim = cosine_similarity(art_embed)
     return cosine_sim
 
 
