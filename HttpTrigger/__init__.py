@@ -5,7 +5,6 @@ import pandas as pd
 from sklearn.metrics.pairwise import cosine_similarity
 import json
 from io import BytesIO
-from urllib.parse import parse_qs
 
 
 def user(dfs_user_art, x):
@@ -23,9 +22,9 @@ def calcul_cosine_similarity(art_embed):
 
 
 def arts_recommendations(arts, art_embed, x):
-    arts = pd.DataFrame(arts)
+    #arts = pd.DataFrame(arts)
     logging.info('---1 -------begin arts_recommendations')
-    indices = pd.Series(arts.index, index=arts[0])
+    indices = pd.Series(arts, index=arts[0])
     idx = indices[x]
     logging.info('---1 -------begin cosine')
     cosine_sim = calcul_cosine_similarity(art_embed)
@@ -81,7 +80,6 @@ def main(req: func.HttpRequest, dfsblob: func.InputStream,
        '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34',
        '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46',
        '47', '48', '49', '50', '51']].to_numpy(dtype=np.float32)
-
     arts = dfs["click_article_id"].value_counts().index
     req_body_bytes = req.get_body()
     logging.info(f"Request Bytes: {req_body_bytes}")
