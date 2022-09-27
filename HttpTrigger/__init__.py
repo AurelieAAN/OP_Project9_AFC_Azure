@@ -5,6 +5,7 @@ import pandas as pd
 from sklearn.metrics.pairwise import cosine_similarity
 import json
 from io import BytesIO
+import gc
 
 
 def user(dfs_user_art, x):
@@ -17,7 +18,8 @@ def user(dfs_user_art, x):
 
 
 def calcul_cosine_similarity(art_embed):
-    cosine_sim = cosine_similarity(art_embed)
+    cosine_sim = cosine_similarity(art_embed, dense_output=False)
+    gc.collect()
     return cosine_sim
 
 
@@ -27,6 +29,7 @@ def arts_recommendations(arts, art_embed, x):
     idx = indices[x]
     logging.info('---1 -------begin cosine')
     cosine_sim = calcul_cosine_similarity(art_embed)
+    gc.collect()
     logging.info('---1 -------end cosine')
     sim_scores = list(enumerate(cosine_sim[idx]))
     sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)
@@ -66,15 +69,7 @@ def main(req: func.HttpRequest, dfsblob: func.InputStream,
     df_arts_embedd_acp = transform_to_dataframe(articlesembedblob)
     logging.info('--------------------Python HTTP trigger function processed a request.')
     del df_arts_embedd_acp["Unnamed: 0"]
-    arts_embedd_acp = df_arts_embedd_acp[['0', '1', '2', '3','4', '5','6','7',
-                                          '8', '9', '10','11','12','13', '14',
-                                          '15', '16', '17', '18', '19', '20',
-                                          '21', '22','23', '24', '25', '26',
-                                          '27', '28', '29', '30', '31', '32',
-                                          '33', '34','35', '36', '37', '38',
-                                          '39', '40', '41', '42', '43', '44',
-                                          '45', '46','47', '48', '49', '50', '51']]
-    arts_embedd_acp = arts_embedd_acp[['0', '1', '2', '3', '4', '5', '6', '7','8', '9', '10',
+    arts_embedd_acp = df_arts_embedd_acp[['0', '1', '2', '3', '4', '5', '6', '7','8', '9', '10',
        '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22',
        '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34',
        '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46',
