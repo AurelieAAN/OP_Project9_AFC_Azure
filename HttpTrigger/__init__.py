@@ -58,7 +58,7 @@ def transform_to_dataframe(dfblob):
     return dfs
 
 
-def main(req: func.HttpRequest, dfsblob: func.InputStream) -> func.HttpResponse:
+def main(req: func.HttpRequest, dfsblob: func.InputStream) -> func.InputStream:
     logging.info('Python HTTP trigger function processed a request.')
     dfs = bytearray(dfsblob.read())
     return func.HttpResponse(
