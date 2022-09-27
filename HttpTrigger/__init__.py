@@ -64,50 +64,8 @@ def main(req: func.HttpRequest, dfsblob: func.InputStream,
          dfsuserartblob: func.InputStream,
          articlesembedblob: func.InputStream) -> func.HttpResponse:
     logging.info('Python HTTP trigger function processed a request.')
-    dfs = transform_to_dataframe(dfsblob)
-    logging.info('-------dfs ok')
-    dfs_user_art = transform_to_dataframe(dfsuserartblob)
-    logging.info('----------dfs_user_art ok')
-    df_arts_embedd_acp = transform_to_dataframe(articlesembedblob)
-    logging.info('-----------df_arts_embedd_acp ok')
-    logging.info('--------------------BEGIN')
-    arts = dfs["click_article_id"].value_counts().index
-    req_body_bytes = req.get_body()
-    logging.info(f"Request Bytes: {req_body_bytes}")
-    req_body = req_body_bytes.decode("utf-8")
-    # logging.info("test1")
-    json_body = json.loads(req_body)
-    logging.info(f"Request json: {json_body}")
-    # logging.info("test:")
-    name = None
-    name = json_body['id_user']
-    logging.info(f"Request name: {name}")
-    # logging.info(f"name: ",name)
-    # #name = req.params.get('id_user')
-    if name is not None:
-        name = int(name)
-        user_arts = user(0)
-        test = pd.DataFrame(user_arts["click_article_id"])
-        test.columns= ["article_id"]
-        test2 = df_arts_embedd_acp.merge(test, how='inner', on='article_id')
-        arts_embedd_acp_user = test2[[ '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10',
-       '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22',
-       '23', '24', '25', '26', '27']].to_numpy(dtype = np.float32)
-        arts_embedd_acp = df_arts_embedd_acp[['0', '1', '2', '3', '4', '5', '6', '7','8', '9', '10',
-       '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22',
-       '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34',
-       '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46',
-       '47', '48', '49', '50', '51']].to_numpy(dtype=np.float32)
-        result = user_recommendation(dfs_user_art,user_arts,arts_embedd_acp,name, arts_embedd_acp_user)
-        result = result.to_json(orient="split")
-        #func.HttpResponse.mimetype = 'application/json'
-        func.HttpResponse.charset = 'utf-8'
-        return func.HttpResponse(
-                json.dumps(result),
-                status_code=200
-                )
-    else:
-        return func.HttpResponse(
-              "This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response.",
-              status_code=200
-        )
+    
+    return func.HttpResponse(
+            "This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response.",
+            status_code=200
+    )
