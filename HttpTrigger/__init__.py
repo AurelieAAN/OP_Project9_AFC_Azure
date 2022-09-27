@@ -5,7 +5,6 @@ import pandas as pd
 from sklearn.metrics.pairwise import cosine_similarity
 import json
 from io import BytesIO
-import gc
 
 
 def user(dfs_user_art, x):
@@ -19,7 +18,6 @@ def user(dfs_user_art, x):
 
 def calcul_cosine_similarity(art_embed):
     cosine_sim = cosine_similarity(art_embed, dense_output=False)
-    gc.collect()
     return cosine_sim
 
 
@@ -29,7 +27,6 @@ def arts_recommendations(arts, art_embed, x):
     idx = indices[x]
     logging.info('---1 -------begin cosine')
     cosine_sim = calcul_cosine_similarity(art_embed)
-    gc.collect()
     logging.info('---1 -------end cosine')
     sim_scores = list(enumerate(cosine_sim[idx]))
     sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)
