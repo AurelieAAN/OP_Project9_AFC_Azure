@@ -49,7 +49,10 @@ def user_recommendation(dfs_user_art, arts,art_embed, x, arts_embedd_acp_user):
     sim_scores = sorted(reco, key=lambda x: x[1], reverse=True)
     sim_scores = sim_scores[1:6]
     logging.info('---1 -------end user_recommendation')
-    return sim_scores
+    json_result = []
+    for item in sim_scores:
+        json_result.append({"article_id":item[0], "cosine_similarity":str(item[1])})
+    return json_result
 
 
 def transform_to_dataframe(blob):
@@ -89,7 +92,6 @@ def main(req: func.HttpRequest, dfsblob: func.InputStream, blobembed: func.Input
         result = user_recommendation(dfs_user_art,test2,arts_embedd_acp,name, arts_embedd_acp_user)
         logging.info("------------------------------------------fin user_reco ok")
         logging.info("------------------------------------------ result ")
-        result = result.to_json(orient="split")
         #func.HttpResponse.mimetype = 'application/json'
         func.HttpResponse.charset = 'utf-8'
         logging.info("------------------------------------------finghgjgjh result ")
