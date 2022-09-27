@@ -53,7 +53,7 @@ def user_recommendation(dfs_user_art, arts,art_embed, x, arts_embedd_acp_user):
 
 
 def transform_to_dataframe(blob):
-    dfs = bytearray(dfblob.read())
+    dfs = bytearray(blob.read())
     dfs = pd.read_csv(BytesIO(dfs))
     return dfs
 
