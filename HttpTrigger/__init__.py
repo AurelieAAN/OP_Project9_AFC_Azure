@@ -60,9 +60,11 @@ def transform_to_dataframe(dfblob, ityp=0):
     return dfs
 
 
-def main(req: func.HttpRequest, dfsblob: func.InputStream,
-         dfsuserartblob: func.InputStream,
-         articlesembedblob: func.InputStream) -> func.HttpResponse:
+def main(req: func.HttpRequest
+        #, dfsblob: func.InputStream,
+        #dfsuserartblob: func.InputStream,
+        # articlesembedblob: func.InputStream
+         ) -> func.HttpResponse:
     logging.info('Python HTTP trigger function processed a request.')
     
     return func.HttpResponse(
