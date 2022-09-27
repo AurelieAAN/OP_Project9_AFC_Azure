@@ -12,6 +12,27 @@
       ]
     },
     {
+      "name": "dfsblob",
+      "type": "blob",
+      "direction":"in",
+      "path": "input/dfs.csv",
+      "connection": "storageacc_STORAGE"
+    },
+    {
+      "name": "dfsuserartblob",
+      "type": "blob",
+      "direction":"in",
+      "path": "input/dfs_user_art.csv",
+      "connection": "storageacc_STORAGE"
+    },
+    {
+      "name": "articlesembedblob",
+      "type": "blob",
+      "direction":"in",
+      "path": "input/df_arts_embedd_acp.csv",
+      "connection": "storageacc_STORAGE"
+    },
+    {
       "type": "http",
       "direction": "out",
       "name": "$return"

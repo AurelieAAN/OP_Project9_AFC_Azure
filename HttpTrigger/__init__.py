@@ -52,18 +52,16 @@ def user_recommendation(dfs_user_art, arts,art_embed, x, arts_embedd_acp_user):
     return sim_scores
 
 
-def transform_to_dataframe(dfblob, ityp=0):
+def transform_to_dataframe(dfblob):
     dfs = bytearray(dfblob.read())
     dfs = pd.read_csv(BytesIO(dfs))
-    if ityp==1:
-        dfs = pd.read_csv(BytesIO(dfs), dtype=np.float32)
     return dfs
 
 
 def main(req: func.HttpRequest
-        #, dfsblob: func.InputStream,
-        #dfsuserartblob: func.InputStream,
-        # articlesembedblob: func.InputStream
+        , dfsblob: func.InputStream,
+        dfsuserartblob: func.InputStream,
+        articlesembedblob: func.InputStream
          ) -> func.HttpResponse:
     logging.info('Python HTTP trigger function processed a request.')
     
