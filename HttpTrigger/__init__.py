@@ -92,7 +92,7 @@ def main(req: func.HttpRequest, dfsblob: func.InputStream, blobembed: func.Input
         result = result.to_json(orient="split")
         #func.HttpResponse.mimetype = 'application/json'
         func.HttpResponse.charset = 'utf-8'
-        logging.info("------------------------------------------fin result ")
+        logging.info("------------------------------------------finghgjgjh result ")
         return func.HttpResponse(
                 json.dumps(result),
                 status_code=200
