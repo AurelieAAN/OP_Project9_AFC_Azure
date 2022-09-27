@@ -58,13 +58,9 @@ def transform_to_dataframe(dfblob):
     return dfs
 
 
-def main(req: func.HttpRequest
-        , dfsblob: func.InputStream,
-        dfsuserartblob: func.InputStream,
-        articlesembedblob: func.InputStream
-         ) -> func.HttpResponse:
+def main(req: func.HttpRequest, dfsblob: func.InputStream) -> func.HttpResponse:
     logging.info('Python HTTP trigger function processed a request.')
-    
+    dfs = bytearray(dfsblob.read())
     return func.HttpResponse(
             "This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response.",
             status_code=200
