@@ -43,9 +43,9 @@ def user_recommendation(dfs_user_art, arts,art_embed, x, arts_embedd_acp_user):
     logging.info('---1 -------begin user_recommendation')
     user_arts = user(dfs_user_art, x)
     for art in user_arts["click_article_id"]:
-        livre = arts_recommendations(arts,art_embed, art)
+        livre = arts_recommendations(arts,art_embed, art,arts_embedd_acp_user)
         reco.append(livre[0])
-    reco = arts_recommendations(arts,art_embed, art, arts_embedd_acp_user)
+    #reco = arts_recommendations(arts,art_embed, art, arts_embedd_acp_user)
     sim_scores = sorted(reco, key=lambda x: x[1], reverse=True)
     sim_scores = sim_scores[1:6]
     logging.info('---1 -------end user_recommendation')
