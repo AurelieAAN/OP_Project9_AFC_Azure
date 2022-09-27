@@ -57,9 +57,11 @@ def transform_to_dataframe(blob):
     dfs = pd.read_csv(BytesIO(dfs))
     return dfs
 
-def main(req: func.HttpRequest, dfsblob: func.InputStream) -> func.HttpResponse:
+def main(req: func.HttpRequest, dfsblob: func.InputStream, blobembed: func.InputStream) -> func.HttpResponse:
     logging.info('Python HTTP trigger function processed a request.')
-    dfs = bytearray(dfsblob.read())
+    dfs = transform_to_dataframe(dfsblob)
+    dfs_user_art = dfs.groupby(["user_id", "click_article_id"])["click_article_id"].count().reset_index(name="nb_click_by_arts")
+    df_arts_embedd_acp = transform_to_dataframe(blobembed)
     logging.info("------------------------------------------ok")
     return func.HttpResponse(
             "This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response.",
