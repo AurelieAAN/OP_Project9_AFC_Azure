@@ -12,9 +12,9 @@
       ]
     },
     {
-      "name": "dfsblob",
       "type": "blob",
       "direction":"in",
+      "name": "dfsblob",
       "path": "input/dfs.csv",
       "connection": "storageacc_STORAGE"
     },
