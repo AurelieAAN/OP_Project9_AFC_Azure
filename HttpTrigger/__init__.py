@@ -52,14 +52,14 @@ def user_recommendation(dfs_user_art, arts,art_embed, x, arts_embedd_acp_user):
     return sim_scores
 
 
-def transform_to_dataframe(dfblob):
+def transform_to_dataframe(blob):
     dfs = bytearray(dfblob.read())
     dfs = pd.read_csv(BytesIO(dfs))
     return dfs
 
 def main(req: func.HttpRequest, dfsblob: func.InputStream) -> func.HttpResponse:
     logging.info('Python HTTP trigger function processed a request.')
-    dfs = bytearray(dfsblob.read())
+    #dfs = bytearray(dfsblob.read())
     logging.info("------------------------------------------ok")
     return func.HttpResponse(
             "This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response.",
