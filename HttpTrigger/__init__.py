@@ -73,8 +73,10 @@ def main(req: func.HttpRequest, dfsblob: func.InputStream, blobembed: func.Input
     logging.info("------------------------------------------ok")
     if name is not None:
         name = int(name)
-        user_arts = user(0)
+        user_arts = user(dfs_user_art, name)
+        logging.info("------------------------------------------user_art ok")
         test = pd.DataFrame(user_arts["click_article_id"])
+        logging.info("------------------------------------------test ok")
         test.columns= ["article_id"]
         test2 = df_arts_embedd_acp.merge(test, how='inner', on='article_id')
         arts_embedd_acp_user = test2[[ '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10',
@@ -85,10 +87,14 @@ def main(req: func.HttpRequest, dfsblob: func.InputStream, blobembed: func.Input
        '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34',
        '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46',
        '47', '48', '49', '50', '51']].to_numpy(dtype=np.float32)
+        logging.info("------------------------------------------debut user_reco ok")
         result = user_recommendation(dfs_user_art,user_arts,arts_embedd_acp,name, arts_embedd_acp_user)
+        logging.info("------------------------------------------fin user_reco ok")
+        logging.info("------------------------------------------ result ")
         result = result.to_json(orient="split")
         #func.HttpResponse.mimetype = 'application/json'
         func.HttpResponse.charset = 'utf-8'
+        logging.info("------------------------------------------fin result ")
         return func.HttpResponse(
                 json.dumps(result),
                 status_code=200
