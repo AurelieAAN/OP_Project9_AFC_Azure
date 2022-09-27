@@ -86,7 +86,7 @@ def main(req: func.HttpRequest, dfsblob: func.InputStream, blobembed: func.Input
        '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22',
        '23', '24', '25', '26', '27']].to_numpy(dtype=np.float32)
         logging.info("------------------------------------------debut user_reco ok")
-        result = user_recommendation(dfs_user_art,user_arts,arts_embedd_acp,name, arts_embedd_acp_user)
+        result = user_recommendation(dfs_user_art,test2,arts_embedd_acp,name, arts_embedd_acp_user)
         logging.info("------------------------------------------fin user_reco ok")
         logging.info("------------------------------------------ result ")
         result = result.to_json(orient="split")
