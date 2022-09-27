@@ -15,7 +15,7 @@
       "type": "blob",
       "direction":"in",
       "name": "dfsblob",
-      "path": "input/dfs.csv",
+      "path": "input/dfs_v2.csv",
       "connection": "storageacc_STORAGE"
     },
     {
